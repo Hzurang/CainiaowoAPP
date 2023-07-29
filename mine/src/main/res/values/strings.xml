@@ -1,0 +1,4 @@
+<resources>
+    <string name="module_name">我的模块</string>
+    <string name="str_login_or_register">去登录</string>
+</resources>

@@ -1,0 +1,27 @@
+if (singleModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+apply from: '../dependencies.gradle'
+apply plugin: 'kotlin-android'
+
+android {
+    //from dependencies.gradle
+    defaultConfig{
+        if (singleModule.toBoolean()){
+            applicationId "com.cainiao.study"
+        }
+    }
+}
+
+dependencies {
+    //from dependencies.gradle
+    implementation project(path: ':service')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    //from dependencies.gradle
+    implementation("com.daimajia.numberprogressbar:library:1.4@aar")
+    implementation 'cn.jzvd:jiaozivideoplayer:7.5.0'
+}

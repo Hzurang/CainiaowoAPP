@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="info"
+            type="com.example.study.net.StudiedRsp.Data" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0.5dp"
+        app:contentPadding="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_badge_item_study"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@{info.img_url}"
+                tools:srcCompat="@drawable/img_course" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_item_study"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{info.name??`Title of Null`}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/npb_progress_item_study"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_badge_item_study"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="菜鸟窝App项目实践【从0开发在线教育App】" />
+
+            <com.daimajia.numberprogressbar.NumberProgressBar
+                android:id="@+id/npb_progress_item_study"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_title_item_study"
+                app:layout_constraintStart_toStartOf="@id/tv_title_item_study"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_item_study"
+                app:progress_current="@{info.progress}"
+                tools:progress_current="14"
+                app:progress_max="100"
+                app:progress_reached_color="@color/colorAccent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

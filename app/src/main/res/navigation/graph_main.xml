@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_main.xml"
+    app:startDestination="@+id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.home.ui.HomeFragment"
+        android:label="@string/str_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.example.course.ui.CourseFragment"
+        android:label="@string/str_course"
+        tools:layout="@layout/fragment_course" />
+    <fragment
+        android:id="@+id/studyFragment"
+        android:name="com.example.study.ui.StudyFragment"
+        android:label="@string/str_study"
+        tools:layout="@layout/fragment_study" />
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.example.mine.ui.MineFragment"
+        android:label="@string/str_mine"
+        tools:layout="@layout/fragment_mine" />
+</navigation>

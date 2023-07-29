@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+apply from: '../dependencies.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+
+    defaultConfig {
+        applicationId "com.example.cainiaowo"
+    }
+
+}
+
+dependencies {
+    if(!singleModule.toBoolean()){
+        implementation project(path: ':login')
+        implementation project(path: ':mine')
+        implementation project(path: ':course')
+        implementation project(path: ':study')
+        implementation project(path: ':home')
+    }
+    implementation project(path: ':service')
+    //packer ng plugin 快速打包 2、依赖
+    implementation 'com.mcxiaoke.packer-ng:helper:2.0.1'//依赖
+}
+
+//packer ng plugin 快速打包 3、配置
+apply plugin: 'packer'
+packer {
+    archiveNameFormat = '${buildType}-v${versionName}-${channel}'
+    archiveOutput = new File(project.rootProject.buildDir, "apks")
+    channelList = ['huawei', 'gogole', 'xiaomi', 'oppo', 'vivo', 'meizu']
+}

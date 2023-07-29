@@ -1,0 +1,23 @@
+if (singleModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+apply from: '../dependencies.gradle'
+apply plugin: 'kotlin-android'
+
+android {
+    //from dependencies.gradle
+    defaultConfig{
+        if (singleModule.toBoolean()){
+            applicationId "com.example.mine"
+        }
+    }
+}
+
+dependencies {
+    //from dependencies.gradle
+    implementation project(path: ':service')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}

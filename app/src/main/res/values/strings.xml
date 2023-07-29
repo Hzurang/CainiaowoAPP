@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">菜鸟教育</string>
+    <string name="str_home">首页</string>
+    <string name="str_course">课程</string>
+    <string name="str_study">学习中心</string>
+    <string name="str_mine">我的</string>
+</resources>

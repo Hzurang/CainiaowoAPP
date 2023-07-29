@@ -1,0 +1,58 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'com.alibaba.arouter'
+apply plugin: 'koin'
+apply plugin: 'com.didi.dokit'
+
+buildscript {
+    ext {
+        kotlin_version = '1.4.10'
+        compile_sdk_version = 29
+        build_tools_version = '29.0.3'
+        min_sdk_version = 21
+        target_sdk_version = 29
+
+        lib_version_code = 1
+        lib_version_name = "1.0.0"
+
+        navigation_version = "2.2.1"//navigation 版本号，需要在dependencies和classpath保持一致
+
+        koin_version = '2.2.2'
+
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://www.jitpack.io' }
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        classpath "com.alibaba:arouter-register:1.0.2"
+        classpath "org.koin:koin-gradle-plugin:$koin_version"
+
+        classpath 'com.didichuxing.doraemonkit:dokitx-plugin:3.3.5'
+        //packer ng plugin 快速打包 1、插件依赖
+        classpath "com.mcxiaoke.packer-ng:plugin:2.0.1"
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://www.jitpack.io' }
+        google()
+        jcenter()
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

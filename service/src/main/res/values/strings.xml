@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Service</string>
+    <string name="str_server_host_dokit">切换Host</string>
+</resources>

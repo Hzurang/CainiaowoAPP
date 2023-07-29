@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_category_course"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="auto"
+            app:tabTextAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/spinner_type_course"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/colorWhite"
+            android:drawableEnd="@drawable/ic_drop_down"
+            android:gravity="center"
+            android:text="全部类型"
+            app:layout_constraintEnd_toStartOf="@id/spinner_level_course"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tl_category_course" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/spinner_level_course"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/colorWhite"
+            android:drawableEnd="@drawable/ic_drop_down"
+            android:gravity="center"
+            android:text="全部难度"
+            app:layout_constraintBaseline_toBaselineOf="@id/spinner_type_course"
+            app:layout_constraintEnd_toStartOf="@id/spinner_price_course"
+            app:layout_constraintStart_toEndOf="@id/spinner_type_course" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/spinner_price_course"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/colorWhite"
+            android:drawableEnd="@drawable/ic_drop_down"
+            android:gravity="center"
+            android:text="全部价格"
+            app:layout_constraintBaseline_toBaselineOf="@id/spinner_level_course"
+            app:layout_constraintEnd_toStartOf="@id/spinner_sort_course"
+            app:layout_constraintStart_toEndOf="@id/spinner_level_course" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/spinner_sort_course"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@color/colorWhite"
+            android:drawableEnd="@drawable/ic_drop_down"
+            android:gravity="center"
+            android:text="默认排序"
+            app:layout_constraintBaseline_toBaselineOf="@id/spinner_price_course"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/spinner_price_course" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_course"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorWindowBackGround"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/spinner_type_course"
+            tools:listitem="@layout/item_course" />
+
+        <ProgressBar
+            android:id="@+id/pb_fragment_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

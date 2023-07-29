@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply from: '../dependencies.gradle'
+apply plugin: 'kotlin-android'
+
+android {
+    //from dependencies.gradle
+}
+
+dependencies {
+    //from dependencies.gradle
+
+    //Androidx Jetpack最新的startUp组件
+    api('androidx.startup:startup-runtime:1.0.0-alpha03')
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    //okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    //retrofit
+    api("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    //gson
+    implementation("com.google.code.gson:gson:2.8.6")
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+
+    //utils
+    api 'com.blankj:utilcodex:1.29.0'
+    //coil
+    implementation("io.coil-kt:coil:0.13.0")
+
+    //腾讯的key-value
+    implementation("com.tencent:mmkv-static:1.2.1")
+    //webview
+    implementation 'com.just.agentweb:agentweb-androidx:4.1.4' // (必选)
+    implementation 'com.just.agentweb:filechooser-androidx:4.1.4'// (可选)
+    //implementation 'com.download.library:downloader-androidx:4.1.4'// (可选)
+}

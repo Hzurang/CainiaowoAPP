@@ -1,0 +1,24 @@
+if (singleModule.toBoolean()){
+    apply plugin: 'com.android.application'
+}else{
+    apply plugin: 'com.android.library'
+}
+
+apply from: '../dependencies.gradle'
+apply plugin: 'kotlin-android'
+
+android {
+    //from dependencies.gradle
+    defaultConfig {
+        if (singleModule.toBoolean()) {
+            applicationId "com.example.home"
+        }
+    }
+}
+
+dependencies {
+    //from dependencies.gradle
+    implementation project(path: ':service')
+    //from dependencies.gradle
+    implementation 'com.youth.banner:banner:2.1.0'
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="info"
+            type="com.example.study.ui.play.LessonSection" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        android:padding="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_play_item"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_item_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:text="@{info.title}"
+            android:textColor="@{info.isPlaying?@color/colorAccent:@color/colorSecondaryText}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_play_item"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1-1 学完本课程能达到成麽样的能力水平" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_try_study"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rectangle_rounded"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="试看"
+            android:textColor="@color/colorAccent"
+            android:visibility="@{info.tryIt?View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_title_item_play"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.example.study.utils.StudyUtils" />
+
+        <variable
+            name="info"
+            type="com.example.study.net.StudiedRsp.Data" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0.5dp"
+        app:contentPadding="0dp"
+        app:layout_constraintTop_toBottomOf="@id/jz_video_study">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_badge_item_study"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@{info.img_url}"
+                tools:srcCompat="@drawable/img_course" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_item_study"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{info.name??`Title of Null`}"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/tv_students_item_course"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_badge_item_study"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread"
+                tools:text="菜鸟窝App项目实践【从0开发在线教育App】" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_students_item_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:text="@{StudyUtils.parseStudentComment(info)}"
+                android:textColor="@color/colorSecondaryText"
+                android:textSize="12sp"
+                app:drawableStartCompat="@drawable/ic_mine_small"
+                app:layout_constraintBottom_toTopOf="@id/tv_price_item_course"
+                app:layout_constraintStart_toStartOf="@id/tv_title_item_study"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_item_study"
+                tools:text="9876 780人评价" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_price_item_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{StudyUtils.parseFree(info)}"
+                android:textColor="@{info.is_free==1?@android:color/holo_blue_light:@color/colorAccent}"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_students_item_course"
+                app:layout_constraintTop_toBottomOf="@id/tv_students_item_course"
+                tools:text="￥999"
+                tools:textColor="@color/colorAccent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_old_price_item_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@{`￥`+info.cost_price}"
+                android:textSize="14sp"
+                android:visibility="@{(info.cost_price>0&amp;&amp;info.is_free!=1)?View.VISIBLE:View.INVISIBLE}"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_price_item_course"
+                app:layout_constraintStart_toEndOf="@id/tv_price_item_course"
+                tools:text="￥1999"
+                tools:textColor="@color/colorSecondaryText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/iv_free_price_item_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/shape_bg_free_study"
+                android:gravity="center"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="2dp"
+                android:text="免费学"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:visibility="@{(info.is_free!=1)?View.VISIBLE:View.INVISIBLE}"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_old_price_item_course"
+                app:layout_constraintStart_toEndOf="@id/tv_old_price_item_course" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

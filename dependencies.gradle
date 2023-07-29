@@ -1,0 +1,187 @@
+//配置各个module共用的参数
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'//kotlin语言使用注入框架，dataBinding都需要这个
+apply plugin: 'androidx.navigation.safeargs.kotlin'//用于navigation传参的时候一种安全防护
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig{
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode lib_version_code
+        versionName lib_version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+                //room 的scheme 生成schema文件，便于查看数据库创建表的详细信息
+                arg("room.schemaLocation": "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), '../proguard-rules.pro'
+        }
+    }
+//AndroidStudio 4 以下使用这种方式配置dataBinding
+//    dataBinding {
+//        enabled true
+//    }
+    //AS4 以上版本使用这个配置dataBinding
+    buildFeatures{
+        dataBinding=true
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn",]//抑制contact契约类编译警告
+    }
+}
+
+dokitExt {
+    //通用设置
+    comm {
+        //地图经纬度开关
+        gpsSwitch true
+        //网络开关
+        networkSwitch true
+        //大图开关
+        bigImgSwitch true
+        //webView js 抓包
+        webViewSwitch true
+    }
+
+    slowMethod {
+        //0:默认模式 打印函数调用栈 需添加指定入口  默认为application onCreate 和attachBaseContext
+        //1:普通模式 运行时打印某个函数的耗时 全局业务代码函数插入
+        strategy 0
+        //函数功能开关
+        methodSwitch true
+
+        //调用栈模式配置
+        stackMethod {
+            //默认值为 5ms 小于该值的函数在调用栈中不显示
+            thresholdTime 10
+            //调用栈函数入口
+            enterMethods = ["com.didichuxing.doraemondemo.MainDebugActivity.test1"]
+            //黑名单 粒度最小到类 暂不支持到方法
+            methodBlacklist = ["com.facebook.drawee.backends.pipeline.Fresco"]
+        }
+        //普通模式配置
+        normalMethod {
+            //默认值为 500ms 小于该值的函数在运行时不会在控制台中被打印
+            thresholdTime 500
+            //需要针对函数插装的包名
+            packageNames = ["com.didichuxing.doraemondemo"]
+            //不需要针对函数插装的包名&类名
+            methodBlacklist = ["com.didichuxing.doraemondemo.dokit"]
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //region 平台相关基础库
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0"
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation("androidx.core:core-ktx:1.2.0")
+    implementation 'androidx.fragment:fragment-ktx:1.2.4'
+    implementation 'androidx.activity:activity-ktx:1.1.0'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.2"
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    //endregion
+
+    //region jetPack libs
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+
+    def room_version = "2.2.6"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+    def paging_version = "3.0.0-alpha07"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    implementation 'androidx.work:work-runtime:2.3.4'
+    implementation 'androidx.work:work-runtime-ktx:2.3.4'
+
+    //注意配置navigation版本号的时候，project下的build.gradle的class path也需要同步navigation的版本号配置
+    implementation "androidx.navigation:navigation-ui:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-runtime:$navigation_version"
+    //endregion
+
+    //region test libs
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'androidx.test:core-ktx:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //endregion
+    //region arouter
+    implementation 'com.alibaba:arouter-api:1.5.1'
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
+    //liveData eventBus
+    implementation 'com.jeremyliao:live-event-bus-x:1.7.2'
+    //endregion
+
+    //region Koin
+    // Koin AndroidX Scope features
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    // Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    // Koin AndroidX Fragment features
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    // Koin AndroidX WorkManager
+    implementation "org.koin:koin-androidx-workmanager:$koin_version"
+    // Koin AndroidX Jetpack Compose
+    implementation "org.koin:koin-androidx-compose:$koin_version"
+    // Koin AndroidX Experimental features
+    implementation "org.koin:koin-androidx-ext:$koin_version"
+    //endregion
+
+    //region 滴滴dokit
+    debugImplementation 'com.didichuxing.doraemonkit:dokitx:3.3.5'
+    releaseImplementation 'com.didichuxing.doraemonkit:dokitx-no-op:3.3.5'
+    //endregion
+    //今日头条的适配方案
+    implementation 'me.jessyan:autosize:1.2.1'
+}
